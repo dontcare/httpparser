@@ -56,6 +56,9 @@ cdef class Headers(Parser):
                 self.headers[name] = value
         return self.headers
 
+    def __dealloc__(self):
+        free(< void * >self.pico_headers)
+
 
 cdef class Request(Headers):
 
@@ -130,3 +133,28 @@ cdef class Response(Headers):
 
     cpdef get_status_name(self):
         return < bytes > self.pico_msg[:self.pico_msg_len]
+
+
+cdef class Chunked:
+
+    cdef:
+        pico.phr_chunked_decoder * pico_decoder
+        char * pico_buf
+        size_t pico_buf_len
+
+    def __cinit__(self, bytes buf):
+        self.pico_decoder = <pico.phr_chunked_decoder * >calloc(1,
+                                                       sizeof(pico.phr_chunked_decoder))
+        self.pico_buf = <char * > < bytes > buf
+        self.pico_buf_len = len(buf)
+        phr = pico.phr_decode_chunked(self.pico_decoder,
+                                      self.pico_buf,
+                                      & self.pico_buf_len)
+        if phr == -1:
+            raise ParserError("Response parser error")
+
+    cpdef is_in_data(self):
+        return pico.phr_decode_chunked_is_in_data(self.pico_decoder)
+
+    def __dealloc__(self):
+        free(< void * >self.pico_decoder)

@@ -1,5 +1,5 @@
-from .parser import Request, Response
+from .parser import Chunked, Request, Response
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
-__all__ = [__version__, Request, Response]
+__all__ = [__version__, Chunked, Request, Response]

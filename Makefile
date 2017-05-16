@@ -7,7 +7,7 @@ compile:
 all: clean compile
 
 release: compile
-	python setup.py sdist upload;
+	python setup.py sdist upload -r https://pypi.python.org/pypi/httpparser;
 
 clean:
 	rm -rf build/;

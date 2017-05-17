@@ -10,7 +10,7 @@ python:
     - 3.6
 
 install:
-    - "pip install --no-binary=:all: cython"
+    - "pip install cython"
     - make
 
 script:

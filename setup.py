@@ -68,6 +68,11 @@ setuptools.setup(
     description=(""),
     long_description=README + "\n\n" + CHANGES,
     classifiers=[
+        'Programming Language :: C',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: Implementation :: CPython',
+        'Topic :: Internet :: WWW/HTTP',
     ],
     keywords='',
     author="Aleksei Sargin",

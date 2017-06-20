@@ -1,6 +1,6 @@
 # cython: language_level=3
 
-cdef extern from "picohttpparser.c":
+cdef extern from "picohttpparser.h":
 
     struct phr_header:
         const char * name

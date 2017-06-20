@@ -19,6 +19,8 @@ ext_modules = [
             "httpparser/parser.c",
         ],
         include_dirs=['./picohttpparser'],
+        libraries=['picohttpparser'],
+        library_dirs=['./'],
         extra_compile_args=['-O2'],
     ),
 ]

@@ -9,14 +9,20 @@ matrix:
   fast_finish: true
   include:
     - os: osx
+      language: python
+      python: "2.7.13"
       services: [docker]
       env: BUILD=wheels PYTHON_VERSION=2.7.13 PIP_USER=1
 
     - os: osx
+      language: python
+      python: "3.5.3"
       services: [docker]
       env: BUILD=wheels PYTHON_VERSION=3.5.3 PIP_USER=1
 
     - os: osx
+      language: python
+      python: "3.6.1"
       services: [docker]
       env: BUILD=wheels PYTHON_VERSION=3.6.1 PIP_USER=1
 
@@ -50,8 +56,11 @@ cache:
 install:
   - pip install --upgrade pip
   - pip install cython
+  - pip install twine
 
 script:
+  - pip install cython
+  - pip install twine
   - make release
 
 deploy:

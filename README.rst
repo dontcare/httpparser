@@ -18,6 +18,7 @@ httpparser requires Python 2.7, 3.4+ and is available on PyPI.
 Use pip to install it::
 
     pip install httpparser
+
     
 Using httpparser
 ----------------

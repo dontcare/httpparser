@@ -1,2 +1,3 @@
-recursive-include httpparser *.py *.c *.pyx *.pxd
+recursive-include picohttpparser *.c *.h
+recursive-include httpparser *.c *.pxd
 include MANIFEST.in LICENSE* README*

@@ -6,7 +6,6 @@ import setuptools
 from setuptools.command.test import test as TestCommand
 
 install_requires = [
-    "cython",
 ]
 
 tests_require = install_requires + [
@@ -71,7 +70,7 @@ setuptools.setup(
     description=(""),
     long_description=README + "\n\n" + CHANGES,
     license='MIT License',
-    platforms=['Linux', 'OSX'],
+    platforms=['*nix', 'OSX'],
     classifiers=[
         'Operating System :: MacOS :: MacOS X',
         'Operating System :: POSIX :: Linux',
@@ -90,7 +89,6 @@ setuptools.setup(
     url="https://github.com/dontcare/httpparser",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    package_data={'httpparser': ['httpparser/*.so']},
     zip_safe=False,
     install_requires=install_requires,
     tests_require=tests_require,

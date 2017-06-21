@@ -1,15 +1,59 @@
-language: python
+language: generic
 
-os:
-    - linux
-    -  osx
+env:
+  global:
+    - PYMODULE: httpparser
+    - RELEASE_PYTHON_VERSIONS: "2.7 3.4 3.5 3.6"
+    - TWINE_USERNAME: dontcare
+    - TWINE_REPOSITORY: httpparser
+    - TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
 
-python:
-    - 2.7
-    - 3.3
-    - 3.4
-    - 3.5
-    - 3.6
+matrix:
+  fast_finish: true
+  include:
+    - os: linux
+      dist: trusty
+      sudo: false
+      language: python
+      python: "2.7.13"
+      services: [docker]
+      env: BUILD=wheels,release PYTHON_VERSION=2.7.13
+
+    - os: linux
+      dist: trusty
+      sudo: false
+      language: python
+      python: "3.5.3"
+      services: [docker]
+      env: BUILD=wheels,release PYTHON_VERSION=3.5.3
+
+    - os: linux
+      dist: trusty
+      sudo: false
+      language: python
+      python: "3.6.1"
+      services: [docker]
+      env: BUILD=wheels,release PYTHON_VERSION=3.6.1
+
+cache:
+  pip
+
+install:
+  - pip install --upgrade pip
+  - pip install cython
+  - pip install twine
 
 script:
-    - make
+  - pip install cython
+  - pip install twine
+  - make release
+
+deploy:
+  provider: pypi
+  user: "dontcare"
+  password:
+    secure: "jtj9sV6TyIoJW8kCnZQMlFdnXLwCkHaBPBhPKVOeAT0wqrOW9u9xZqU2/m1c3J28sLpMLBkIDgkiRSDLeQVo5FDh/6l/loTavu+ZjSnEh869O6DBeISzfsTfJ6Q4zK1fyaXpDk47bXZN+TVQAw/6AkUGbfsnHoUcFjDM+WgIRE2hJCOunRFh4XQiwQhNOkEu+6HgvHLZcDdTDcXz3UHixUgJJoHbW9XmGpDrJIjQKc4j7riMKnX0AdZX6/e2IzvdoaR+QDPCuLZbsRrzXpKTtDrqt6L618voxvgp++Axf7DHB481M9v46HiRv0KnuOuNgCU5QJ3+D2wz5uAI0b3pYwknGVKYP4Zkt8fcXsAr9DWzWXtAWjwBMOrzUwd3IkHl1Vj6wdTOpeRqurzGXVonIA9IyFOoh04MFnsM/4KCAOguu068P5KVBU5gk4S8OkvJHPmsJH2BSQ9LgAr9IA6xbvnZfbRlDtbE7Wvs0ypGV7JqywGJSoqt+/zayysRgoOvm4pj3y93m7iPNs3dG9CQfGll+wRy4WjCkwkX6cEGII+h6x2lEKPUqlU5jZxRrI20II+F/9YysIuj98sVzjoa+Cn0DZVDIZMX9tT6ooEJHUc+kDTdATx6Gyam352brgc+izEybAQ/p42h1t5pcfSEmbgKBcQ1ySFfKfGN37vof7s="
+  distributions: "sdist bdist_wheel"
+  on:
+    branch: v0.3
+    tags: false

@@ -1,7 +1,12 @@
 HTTPPARSER
 ==========
 
-|Build Status| |PyPI| |PyPI version|
+.. image:: https://travis-ci.org/dontcare/httpparser.svg?branch=master
+    :target: https://travis-ci.org/dontcare/httpparser
+
+.. image:: https://img.shields.io/pypi/v/httpparser.svg
+    :target: https://pypi.python.org/pypi/httpparser
+
 
 httpparser is a Python binding for PicoHttpParser
 

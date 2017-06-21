@@ -61,7 +61,7 @@ install:
 script:
   - pip install cython
   - pip install twine
-  - make
+  - make release
 
 deploy:
   provider: pypi

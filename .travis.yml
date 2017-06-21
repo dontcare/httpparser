@@ -6,7 +6,11 @@ matrix:
       services:
         - docker
     - os: osx
+      sudo: true
+      language: python
     - os: linux
+      sudo: true
+      language: python
 
 env:
   global:
@@ -19,5 +23,5 @@ script:
   - |
     if [[ $TRAVIS_TAG ]]; then
       python -m pip install twine
-      python -m twine upload wheelhouse/*.whl
+      python -m twine upload wheelhouse/*.whl -r https://pypi.python.org/pypi/httpparser
     fi

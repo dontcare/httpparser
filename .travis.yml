@@ -1,18 +1,26 @@
 language: generic
 
+env:
+  global:
+    - PYMODULE=uvloop
+    - RELEASE_PYTHON_VERSIONS="2.7 3.4 3.5 3.6"
+
 matrix:
+  fast_finish: true
   include:
-    - sudo: required
-      services:
-        - docker
     - os: osx
-      sudo: true
-      language: python
-      python: "3.6.1"
+      env: BUILD=wheels PYTHON_VERSION=3.5.3 PIP_USER=1
+
+    - os: osx
+      env: BUILD=wheels PYTHON_VERSION=3.6.1 PIP_USER=1
+
     - os: linux
-      sudo: true
+      dist: trusty
+      sudo: false
       language: python
       python: "3.6.1"
+      services: [docker]
+      env: BUILD=wheels,release
 
 env:
   global:
@@ -21,9 +29,3 @@ env:
 script:
   - pip install cibuildwheel cython
   - make
-  - cibuildwheel --output-dir wheelhouse
-  - |
-    if [[ $TRAVIS_TAG ]]; then
-      python -m pip install twine
-      python -m twine upload wheelhouse/*.whl -r https://pypi.python.org/pypi/httpparser
-    fi

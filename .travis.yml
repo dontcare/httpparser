@@ -8,9 +8,11 @@ matrix:
     - os: osx
       sudo: true
       language: python
+      python: "3.6.1"
     - os: linux
       sudo: true
       language: python
+      python: "3.6.1"
 
 env:
   global:

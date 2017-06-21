@@ -8,7 +8,9 @@ compile:
 all: clean compile
 
 release: compile
-	python setup.py bdist_wheel upload -r https://pypi.python.org/pypi/httpparser;
+	python setup.py sdist
+	python -m twine upload dist/*.whl dist/*.tar.* -r https://pypi.python.org/pypi/httpparser
+	#python setup.py bdist_wheel upload -r https://pypi.python.org/pypi/httpparser;
 
 clean:
 	rm -rf build/;

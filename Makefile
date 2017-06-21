@@ -1,4 +1,4 @@
-.PHONY: compile release clean
+.PHONY: compile release clean wheel
 
 compile:
 	gcc -c ./picohttpparser/picohttpparser.c -O3 -fpic
@@ -7,8 +7,11 @@ compile:
 
 all: clean compile
 
+wheel:
+	cibuildwheel --output-dir dist/ --platform linux ./
+
 release: compile
-	python setup.py bdist_wheel upload -r https://pypi.python.org/pypi/httpparser;
+	python setup.py sdist upload -r https://pypi.python.org/pypi/httpparser;
 
 clean:
 	rm -rf build/;

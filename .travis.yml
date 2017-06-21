@@ -1,4 +1,3 @@
-sudo: required
 language: generic
 
 env:
@@ -10,12 +9,15 @@ matrix:
   fast_finish: true
   include:
     - os: osx
+      services: [docker]
       env: BUILD=wheels PYTHON_VERSION=2.7.13 PIP_USER=1
 
     - os: osx
+      services: [docker]
       env: BUILD=wheels PYTHON_VERSION=3.5.3 PIP_USER=1
 
     - os: osx
+      services: [docker]
       env: BUILD=wheels PYTHON_VERSION=3.6.1 PIP_USER=1
 
     - os: linux

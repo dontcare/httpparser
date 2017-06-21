@@ -2,10 +2,11 @@ language: generic
 
 env:
   global:
-    - PYMODULE=httpparser
-    - RELEASE_PYTHON_VERSIONS="2.7 3.4 3.5 3.6"
+    - PYMODULE: httpparser
+    - RELEASE_PYTHON_VERSIONS: "2.7 3.4 3.5 3.6"
     - TWINE_USERNAME: dontcare
-    - TWINE_REPOSITORY_URL: https://pypi.python.org/pypi/httpparser
+    - TWINE_REPOSITORY: httpparser
+    - TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
 
 matrix:
   fast_finish: true

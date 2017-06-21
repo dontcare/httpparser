@@ -1,2 +1,2 @@
-recursive-include httpparser *.py *.c
+recursive-include httpparser *.py *.c *.pyx *.pxd
 include MANIFEST.in LICENSE* README*

@@ -1,15 +1,23 @@
-language: python
+language: generic
 
-os:
-    - linux
-    -  osx
+matrix:
+  include:
+    - sudo: required
+      services:
+        - docker
+    - os: osx
+    - os: linux
 
-python:
-    - 2.7
-    - 3.3
-    - 3.4
-    - 3.5
-    - 3.6
+env:
+  global:
+    - TWINE_USERNAME=dontcare
 
 script:
-    - make
+  - pip install cibuildwheel cython
+  - make
+  - cibuildwheel --output-dir wheelhouse
+  - |
+    if [[ $TRAVIS_TAG ]]; then
+      python -m pip install twine
+      python -m twine upload wheelhouse/*.whl
+    fi

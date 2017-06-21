@@ -9,10 +9,29 @@ matrix:
   fast_finish: true
   include:
     - os: osx
+      env: BUILD=wheels PYTHON_VERSION=2.7.13 PIP_USER=1
+
+    - os: osx
       env: BUILD=wheels PYTHON_VERSION=3.5.3 PIP_USER=1
 
     - os: osx
       env: BUILD=wheels PYTHON_VERSION=3.6.1 PIP_USER=1
+
+    - os: linux
+      dist: trusty
+      sudo: false
+      language: python
+      python: "2.7.13"
+      services: [docker]
+      env: BUILD=wheels,release
+
+    - os: linux
+      dist: trusty
+      sudo: false
+      language: python
+      python: "3.5.3"
+      services: [docker]
+      env: BUILD=wheels,release
 
     - os: linux
       dist: trusty
@@ -27,5 +46,6 @@ env:
     - TWINE_USERNAME=dontcare
 
 script:
-  - pip install cibuildwheel cython
+  - pip install --upgrade pip
+  - pip install cython
   - make

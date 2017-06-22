@@ -7,7 +7,8 @@ env:
     - TWINE_USERNAME: dontcare
     - TWINE_REPOSITORY: httpparser
     - TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
-    - CIBW_SKIP="cp26-* cp33-* manylinux1_i386* manylinux1_i686*"
+    - CIBW_SKIP="cp26-* cp33-* *-manylinux1_i386 *-manylinux1_i686"
+    - CIBW_OUPUT_DIR="dist/"
 
 matrix:
   fast_finish: true
@@ -20,7 +21,7 @@ matrix:
       install:
         - pip install cibuildwheel
       script:
-        - cibuildwheel --platform macos --output-dir dist/
+        - cibuildwheel --platform macos --output-dir $CIBW_OUPUT_DIR
       
     - os: linux
       dist: trusty
@@ -38,4 +39,4 @@ matrix:
         - pip install cibuildwheel
       script:
         - make
-        - cibuildwheel --platform linux --output-dir dist/
+        - cibuildwheel --platform linux --output-dir $CIBW_OUPUT_DIR

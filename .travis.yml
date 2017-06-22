@@ -1,19 +1,27 @@
 matrix:
   fast_finish: true
   include:
-    - sudo: required
-    - os: osx
-      env: BUILD=wheels PYTHON_VERSION=2.7.13 PIP_USER=1
+
+    - os: linux
+      dist: trusty
+      sudo: false
+      language: python
+      python: "3.6.1"
+      services: [docker]
+      env: BUILD=wheels,release PYTHON_VERSION=3.6.1
 
 
 cache:
   pip
-
-install:
+  
+ install:
   - pip install --upgrade pip
   - pip install cython
   - pip install cibuildwheel==0.2.1
-  
+
 script:
+  - pip install cython
+  - pip install twine
   - make
   - cibuildwheel --output-dir wheelhouse
+

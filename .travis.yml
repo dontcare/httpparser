@@ -14,10 +14,14 @@ matrix:
   fast_finish: true
   include:
     - os: macos
+      env:
+        platform: macos
       language: python
       python: "2.7.13"
       
     - os: linux
+      env:
+        platform: linux
       dist: trusty
       sudo: true
       language: python
@@ -31,5 +35,5 @@ install:
   - pip install cibuildwheel
 
 script:
-  - cibuildwheel --output-dir wheelhouse
+  - cibuildwheel --platform $platform --output-dir wheelhouse
 

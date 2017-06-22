@@ -15,8 +15,8 @@ matrix:
       dist: trusty
       sudo: true
       language: python
-      python: "3.6.1"
-      env: BUILD=wheels,release PYTHON_VERSION=3.6.1
+      python: "2.7.13"
+      env: BUILD=wheels,release PYTHON_VERSION=2.7.13
 
 
 cache:

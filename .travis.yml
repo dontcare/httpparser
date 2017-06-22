@@ -15,7 +15,7 @@ matrix:
   include:
     - os: osx
       env:
-        - CIBW_BEFORE_BUILD="sh -c '- python -m pip install twine && python -m pip install cython && make'"
+        - CIBW_BEFORE_BUILD="sh -c 'python -m pip install cython && make'"
       #before_install:
       #  - python -m pip install pip --upgrade
       #  - python -m pip install cython
@@ -27,7 +27,8 @@ matrix:
         - python -m pip install twine
       script:
         - cibuildwheel --platform macos --output-dir $CIBW_OUPUT_DIR
-      after_script:
+      after_success:
+        - python -m pip install twine
         - python -m twine upload dist/*.whl
 
       
@@ -52,6 +53,6 @@ matrix:
 cache:
   pip
 
-after_success:
-  - python setup.py sdist
-  - python -m twine upload dist/*.tar.*
+#after_success:
+#  - python setup.py sdist
+#  - python -m twine upload dist/*.tar.*

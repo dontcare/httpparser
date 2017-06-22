@@ -7,6 +7,7 @@ env:
     - TWINE_USERNAME: dontcare
     - TWINE_REPOSITORY: httpparser
     - TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
+    - CIBW_BEFORE_BUILD: make
 
 matrix:
   fast_finish: true
@@ -26,6 +27,5 @@ install:
   - pip install --upgrade pip cython cibuildwheel
 
 script:
-  - make
   - cibuildwheel --output-dir wheelhouse
 

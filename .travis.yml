@@ -7,7 +7,7 @@ env:
     - TWINE_USERNAME: dontcare
     - TWINE_REPOSITORY: httpparser
     - TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
-    - CIBW_BEFORE_BUILD: make
+    - CIBW_BEFORE_BUILD: .ci/cibuild_before.sh
 
 matrix:
   fast_finish: true

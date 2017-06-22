@@ -1,3 +1,2 @@
-recursive-include picohttpparser *.c *.h
-recursive-include httpparser *.c *.pxd
+recursive-include httpparser *.c *.h *.pxd
 include MANIFEST.in LICENSE* README* *.o

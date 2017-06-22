@@ -1,4 +1,5 @@
 matrix:
+  fast_finish: true
   include:
     - sudo: required
       services:
@@ -9,6 +10,15 @@ matrix:
       env: BUILD=wheels PYTHON_VERSION=2.7.13 PIP_USER=1
 
 
-script:
+cache:
+  pip
+
+install:
+  - pip install --upgrade pip
+  - pip install cython
+  - pip install cython
   - pip install cibuildwheel==0.2.1
   - cibuildwheel --output-dir wheelhouse
+  
+script:
+  - make

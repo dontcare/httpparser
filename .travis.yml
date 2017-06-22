@@ -4,6 +4,10 @@ matrix:
       services:
         - docker
     - os: osx
+      language: python
+      python: "2.7.13"
+      env: BUILD=wheels PYTHON_VERSION=2.7.13 PIP_USER=1
+
 
 script:
   - pip install cibuildwheel==0.2.1

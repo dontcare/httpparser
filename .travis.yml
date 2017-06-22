@@ -59,6 +59,7 @@ install:
 
 script:
   - cibuildwheel --platform $PLATFORM --output-dir $CIBW_OUPUT_DIR
+  - make
 
 after_success:
   - pip install cython

@@ -13,32 +13,31 @@ env:
 matrix:
   fast_finish: true
   include:
-    - os: osx
-      env:
-        - CIBW_BEFORE_BUILD="sh -c 'pip install --upgrade pip && pip install cython && make'"
-        - PLATFORM=macos
-      #before_install:
-      #  - python -m pip install pip --upgrade
-      #  - python -m pip install cython
-      #  - python -m pip install twine
-      #  - make
-      #install:
-      #  - python -m pip install pip --upgrade
-      #  - python -m pip install cibuildwheel
-      #  - python -m pip install twine
-      #  - make
-      #after_script:
-      #  #- python -m pip install twine
-      #  - python setup.py sdist
-      #  - python -m twine upload dist/*.whl dist/*.tar.*
-
+    #- os: osx
+    #  env:
+    #    - CIBW_BEFORE_BUILD="sh -c 'pip install --upgrade pip && pip install cython && make'"
+    #    - PLATFORM=macos
+    #  before_install:
+    #    - python -m pip install pip --upgrade
+    #    - python -m pip install cython
+    #    - python -m pip install twine
+    #    - make
+    #  install:
+    #    - python -m pip install pip --upgrade
+    #    - python -m pip install cibuildwheel
+    #    - python -m pip install twine
+    #    - make
+    #  after_script:
+    #    #- python -m pip install twine
+    #    - python setup.py sdist
+    #    - python -m twine upload dist/*.whl dist/*.tar.*
       
     - os: linux
       sudo: false
       dist: trusty
       language: python
       python: "2.7.13"
-      services: [docker]
+      #services: [docker]
       env:
         - CIBW_BEFORE_BUILD="pip install --upgrade pip && pip install cython && make"
         - PLATFORM=linux
@@ -53,16 +52,19 @@ matrix:
 cache:
   pip
 
+before_install:
+  - pip install pip --upgrade  
+  - pip install cibuildwheel
+  - pip install cython
+
 install:
-  - pip install pip --upgrade
+  - make
 
 script:
-  #- pip install pip --upgrade
-  - pip install cibuildwheel
   - cibuildwheel --platform $PLATFORM --output-dir $CIBW_OUPUT_DIR
+
+after_success:
   - pip install twine
-  - pip install cython
-  - make
   - python setup.py sdist
   - python -m twine upload dist/*.whl dist/*.tar.*
 

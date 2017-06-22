@@ -14,38 +14,40 @@ matrix:
   fast_finish: true
   include:
     - os: osx
-      before_install:
-        - python -m pip install pip --upgrade
-        - python -m pip install cython
-        - python -m pip install twine
-        - make
+      env:
+        - CIBW_BEFORE_BUILD="python -m pip install cython && make"
+      #before_install:
+      #  - python -m pip install pip --upgrade
+      #  - python -m pip install cython
+      #  - python -m pip install twine
+      #  - make
       install:
         - python -m pip install pip --upgrade
         - python -m pip install cibuildwheel
         - python -m pip install twine
       script:
         - cibuildwheel --platform macos --output-dir $CIBW_OUPUT_DIR
-      after_success:
+      after_script:
         - python -m twine upload dist/*.whl
 
       
-    - os: linux
-      sudo: false
-      dist: trusty
-      language: python
-      python: "2.7.13"
-      services: [docker]
-      env:
-        - CIBW_BEFORE_BUILD="pip install cython && make"
-        - BUILD=wheels,release
-        - PYTHON_VERSION=2.7.13
-      install:
-        - pip install cibuildwheel
-        - pip install twine
-      script:
-        - cibuildwheel --platform linux --output-dir $CIBW_OUPUT_DIR
-      after_success:
-        - python -m twine upload dist/*.whl
+    #- os: linux
+    #  sudo: false
+    #  dist: trusty
+    #  language: python
+    #  python: "2.7.13"
+    #  services: [docker]
+    #  env:
+    #    - CIBW_BEFORE_BUILD="pip install cython && make"
+    #    - BUILD=wheels,release
+    #    - PYTHON_VERSION=2.7.13
+    #  install:
+    #    - pip install cibuildwheel
+    #    - pip install twine
+    #  script:
+    #    - cibuildwheel --platform linux --output-dir $CIBW_OUPUT_DIR
+    #  after_success:
+    #    - python -m twine upload dist/*.whl
 
 cache:
   pip

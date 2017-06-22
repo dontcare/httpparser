@@ -1,12 +1,21 @@
+language: generic
+
+env:
+  global:
+    - PYMODULE: httpparser
+    - RELEASE_PYTHON_VERSIONS: "2.7 3.4 3.5 3.6"
+    - TWINE_USERNAME: dontcare
+    - TWINE_REPOSITORY: httpparser
+    - TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
+
 matrix:
   fast_finish: true
   include:
     - os: linux
       dist: trusty
-      sudo: false
+      sudo: true
       language: python
       python: "3.6.1"
-      services: [docker]
       env: BUILD=wheels,release PYTHON_VERSION=3.6.1
 
 

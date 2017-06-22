@@ -25,6 +25,7 @@ matrix:
         - python -m pip install pip --upgrade
         - python -m pip install cibuildwheel
         - python -m pip install twine
+        - make
       script:
         - cibuildwheel --platform macos --output-dir $CIBW_OUPUT_DIR
       after_script:

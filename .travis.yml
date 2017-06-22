@@ -16,6 +16,7 @@ matrix:
     - os: osx
       env:
         - CIBW_BEFORE_BUILD="sh -c 'python -m pip install cython && make'"
+        - PLATFORM=macos
       #before_install:
       #  - python -m pip install pip --upgrade
       #  - python -m pip install cython
@@ -26,41 +27,43 @@ matrix:
       #  - python -m pip install cibuildwheel
       #  - python -m pip install twine
       #  - make
-      script:
-        - python -m pip install pip --upgrade
-        - python -m pip install cibuildwheel
-        - cibuildwheel --platform macos --output-dir $CIBW_OUPUT_DIR
-        - python -m pip install twine
-        - python -m pip install cython
-        - make
-        - python setup.py sdist
-        - python -m twine upload dist/*.whl dist/*.tar.*
       #after_script:
       #  #- python -m pip install twine
       #  - python setup.py sdist
       #  - python -m twine upload dist/*.whl dist/*.tar.*
 
       
-    #- os: linux
-    #  sudo: false
-    #  dist: trusty
-    #  language: python
-    #  python: "2.7.13"
-    #  services: [docker]
-    #  env:
-    #    - CIBW_BEFORE_BUILD="pip install cython && make"
-    #    - BUILD=wheels,release
-    #    - PYTHON_VERSION=2.7.13
-    #  install:
-    #    - pip install cibuildwheel
-    #    - pip install twine
-    #  script:
-    #    - cibuildwheel --platform linux --output-dir $CIBW_OUPUT_DIR
-    #  after_success:
-    #    - python -m twine upload dist/*.whl
+    - os: linux
+      sudo: false
+      dist: trusty
+      language: python
+      python: "2.7.13"
+      #services: [docker]
+      env:
+        - CIBW_BEFORE_BUILD="pip install cython && make"
+        - BUILD=wheels,release
+        - PYTHON_VERSION=2.7.13
+        - PLATFORM=linux
+      #install:
+      #  - pip install cibuildwheel
+      #  - pip install twine
+      #script:
+      #  - cibuildwheel --platform linux --output-dir $CIBW_OUPUT_DIR
+      #after_success:
+      #  - python -m twine upload dist/*.whl
 
 cache:
   pip
+
+script:
+  - python -m pip install pip --upgrade
+  - python -m pip install cibuildwheel
+  - cibuildwheel --platform macos --output-dir $CIBW_OUPUT_DIR
+  - python -m pip install twine
+  - python -m pip install cython
+  - make
+  - python setup.py sdist
+  - python -m twine upload dist/*.whl dist/*.tar.*
 
 #after_success:
 #  - python setup.py sdist

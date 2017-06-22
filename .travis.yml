@@ -7,7 +7,7 @@ env:
     - TWINE_USERNAME: dontcare
     - TWINE_REPOSITORY: httpparser
     - TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
-    - CIBW_SKIP="cp26-* cp33-* *i386* *i686*"
+    - CIBW_SKIP="cp26-* cp33-*"
     - CIBW_OUPUT_DIR="dist/"
 
 matrix:
@@ -24,13 +24,13 @@ matrix:
     #    - cibuildwheel --platform macos --output-dir $CIBW_OUPUT_DIR
       
     - os: linux
+      sudo: false
       dist: trusty
-      sudo: required
       language: python
       python: "2.7.13"
       services: [docker]
       env:
-        - CIBW_BEFORE_BUILD=""
+        - CIBW_BEFORE_BUILD="make"
         - BUILD=wheels,release
         - PYTHON_VERSION=2.7.13
       install:

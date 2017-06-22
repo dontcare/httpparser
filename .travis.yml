@@ -7,7 +7,7 @@ env:
     - TWINE_USERNAME: dontcare
     - TWINE_REPOSITORY: httpparser
     - TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
-    - CIBW_SKIP="cp26-* cp33-* *-manylinux1_i386 *-manylinux1_i686"
+    - CIBW_SKIP="cp26-* cp33-* *i386* *i686*"
     - CIBW_OUPUT_DIR="dist/"
 
 matrix:
@@ -28,11 +28,11 @@ matrix:
       sudo: false
       language: python
       python: "2.7.13"
-      services: [docker]
+      #services: [docker]
       env:
-          BUILD=wheels,release
-          PYTHON_VERSION=2.7.13
-          PLATFORM=linux
+        - CIBW_BEFORE_BUILD=""
+        - BUILD=wheels,release
+        - PYTHON_VERSION=2.7.13
       install:
         - pip install --upgrade pip
         - pip install cython

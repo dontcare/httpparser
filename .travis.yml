@@ -3,11 +3,11 @@ language: generic
 env:
   global:
     - PYMODULE: httpparser
-    - RELEASE_PYTHON_VERSIONS: "2.7 3.4 3.5 3.6"
+    - RELEASE_PYTHON_VERSIONS: "2.7 3.5 3.6"
     - TWINE_USERNAME: dontcare
     - TWINE_REPOSITORY: httpparser
     - TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
-    - CIBW_SKIP="cp26-* cp33-* cp34-* cp35-* cp36-*"
+    - CIBW_SKIP="cp26-* cp33-* cp34*"
     - CIBW_OUPUT_DIR="dist/"
 
 matrix:
@@ -15,7 +15,7 @@ matrix:
   include:
     - os: osx
       env:
-        - CIBW_BEFORE_BUILD="sh -c 'python -m pip install cython && make'"
+        - CIBW_BEFORE_BUILD="sh -c '- python -m pip install twine && python -m pip install cython && make'"
       #before_install:
       #  - python -m pip install pip --upgrade
       #  - python -m pip install cython

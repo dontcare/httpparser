@@ -23,13 +23,9 @@ cache:
   pip
   
 install:
-  - pip install --upgrade pip
-  - pip install cython
-  - pip install cibuildwheel==0.2.1
+  - pip install --upgrade pip cython cibuildwheel==0.2.1
 
 script:
-  - pip install cython
-  - pip install twine
   - make
   - cibuildwheel --output-dir wheelhouse
 

@@ -12,9 +12,8 @@ cache:
 install:
   - pip install --upgrade pip
   - pip install cython
-  - make
   - pip install cibuildwheel==0.2.1
-  - cibuildwheel --output-dir wheelhouse
   
 script:
   - make
+  - cibuildwheel --output-dir wheelhouse

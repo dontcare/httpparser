@@ -15,19 +15,19 @@ matrix:
   include:
     - os: osx
       env:
-        global:
-          PLATFORM=macos
-      language: python
-      python: "2.7.13"
+        PLATFORM=macos
+      #language: python
+      #python: "2.7.13"
       
-    - os: linux
-      dist: trusty
-      sudo: true
-      language: python
-      python: "2.7.13"
-      env:
-        global:
-          BUILD=wheels,release PYTHON_VERSION=2.7.13 PLATFORM=linux
+    #- os: linux
+    #  dist: trusty
+    #  sudo: true
+    #  language: python
+    #  python: "2.7.13"
+    #  env:
+    #      BUILD=wheels,release
+    #      PYTHON_VERSION=2.7.13
+    #      PLATFORM=linux
 
 
 install:
@@ -36,5 +36,6 @@ install:
   - pip install cibuildwheel
 
 script:
-  - cibuildwheel --platform $PLATFORM --output-dir wheelhouse
+  - ./.ci/cibuild_before.sh
+  #- cibuildwheel --platform $PLATFORM --output-dir wheelhouse
 

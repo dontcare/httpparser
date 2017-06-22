@@ -7,15 +7,18 @@ env:
     - TWINE_USERNAME: dontcare
     - TWINE_REPOSITORY: httpparser
     - TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
-    - CIBW_SKIP="cp26-* cp33-* cp34-* cp35-* cp36-*"
-    - CIBW_BEFORE_BUILD="python -m pip install cython && make"
 
 matrix:
   fast_finish: true
   include:
     - os: osx
       env:
-        PLATFORM=macos
+        - PLATFORM=macos
+        - CIBW_SKIP="cp26-* cp33-* cp34-* cp35-* cp36-*"
+        #- CIBW_BEFORE_BUILD=""
+      before_install:
+        - python -m pip install cython
+        - make
       #language: python
       #python: "2.7.13"
       
@@ -37,4 +40,3 @@ install:
 
 script:
   - cibuildwheel --platform $PLATFORM --output-dir wheelhouse
-

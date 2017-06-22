@@ -38,11 +38,11 @@ matrix:
       #  - python -m pip install cython
       #  - make
       install:
-        - pip install --upgrade pip
-        - pip install cython
+      #  - pip install --upgrade pip
+      #  - pip install cython
         - pip install cibuildwheel
       script:
-        - make
+        #- make
         - cibuildwheel --platform linux --output-dir $CIBW_OUPUT_DIR
 
 cache:

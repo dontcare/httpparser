@@ -30,7 +30,7 @@ matrix:
       python: "2.7.13"
       services: [docker]
       env:
-        - CIBW_BEFORE_BUILD="pip -m pip install cython & make"
+        - CIBW_BEFORE_BUILD="pip install cython && make"
         - BUILD=wheels,release
         - PYTHON_VERSION=2.7.13
       #before_install:

@@ -13,7 +13,7 @@ env:
 matrix:
   fast_finish: true
   include:
-    - os: macos
+    - os: osx
       env:
         global:
           PLATFORM=macos

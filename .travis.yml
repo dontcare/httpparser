@@ -34,15 +34,13 @@ matrix:
 
       
     - os: linux
-      sudo: enabled
+      sudo: false
       dist: trusty
       language: python
       python: "2.7.13"
       services: [docker]
       env:
         - CIBW_BEFORE_BUILD="pip install --upgrade pip && pip install cython && make"
-        - BUILD=wheels,release
-        - PYTHON_VERSION=2.7.13
         - PLATFORM=linux
       #install:
       #  - pip install cibuildwheel

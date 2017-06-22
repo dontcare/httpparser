@@ -23,6 +23,9 @@ matrix:
         - pip install twine
       script:
         - cibuildwheel --platform macos --output-dir $CIBW_OUPUT_DIR
+      after_success:
+        - python -m twine upload dist/*.whl
+
       
     - os: linux
       sudo: false
@@ -46,9 +49,12 @@ matrix:
       script:
         #- make
         - cibuildwheel --platform linux --output-dir $CIBW_OUPUT_DIR
+      after_success:
+        - python -m twine upload dist/*.whl
 
 cache:
   pip
 
 after_success:
-  - python -m twine upload dist/*.whl dist/*.tar.*
+  - python setup.py sdist
+  - python -m twine upload dist/*.tar.*

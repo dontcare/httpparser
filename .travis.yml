@@ -11,7 +11,7 @@ env:
 matrix:
   fast_finish: true
   include:
-    - os: linux
+  - os: linux
       dist: trusty
       sudo: true
       language: python
@@ -22,7 +22,7 @@ matrix:
 cache:
   pip
   
- install:
+install:
   - pip install --upgrade pip
   - pip install cython
   - pip install cibuildwheel==0.2.1

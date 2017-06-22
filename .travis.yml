@@ -36,10 +36,8 @@ matrix:
         - make
 
 
-#install:
-#  - pip install --upgrade pip
-#  - pip install cython
-#  - pip install cibuildwheel
-#
-#script:
-#  - cibuildwheel --platform $PLATFORM --output-dir dist/
+install:
+  - pip install cibuildwheel
+
+script:
+  - cibuildwheel --platform $PLATFORM --output-dir dist/

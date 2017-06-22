@@ -36,6 +36,5 @@ install:
   - pip install cibuildwheel
 
 script:
-  - ./ci/cibuild_before.sh
-  #- cibuildwheel --platform $PLATFORM --output-dir wheelhouse
+  - cibuildwheel --platform $PLATFORM --output-dir wheelhouse
 

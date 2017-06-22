@@ -7,18 +7,18 @@ env:
     - TWINE_USERNAME: dontcare
     - TWINE_REPOSITORY: httpparser
     - TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
-    - CIBW_SKIP="cp26-* cp33-* manylinux1_i386"
+    - CIBW_SKIP="cp26-* cp33-* manylinux1_i386 manylinux1_i686"
 
 matrix:
   fast_finish: true
   include:
     - os: osx
-      env:
-        - PLATFORM=macos
       before_install:
         - python -m pip install pip --upgrade
         - python -m pip install cython
         - make
+      script:
+        - cibuildwheel --platform macos --output-dir dist/
       
     - os: linux
       dist: trusty
@@ -30,14 +30,10 @@ matrix:
           BUILD=wheels,release
           PYTHON_VERSION=2.7.13
           PLATFORM=linux
-      before_install:
-        - python -m pip install pip --upgrade
-        - python -m pip install cython
+      install:
+        - pip install --upgrade pip
+        - pip install cython
+        - pip install cibuildwheel
+      script:
         - make
-
-
-install:
-  - pip install cibuildwheel
-
-script:
-  - cibuildwheel --platform $PLATFORM --output-dir dist/
+        - cibuildwheel --platform linux --output-dir dist/

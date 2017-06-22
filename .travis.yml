@@ -17,6 +17,8 @@ matrix:
         - python -m pip install pip --upgrade
         - python -m pip install cython
         - make
+      install:
+        - pip install cibuildwheel
       script:
         - cibuildwheel --platform macos --output-dir dist/
       

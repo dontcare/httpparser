@@ -21,17 +21,24 @@ matrix:
       #  - python -m pip install cython
       #  - python -m pip install twine
       #  - make
-      install:
+      #install:
+      #  - python -m pip install pip --upgrade
+      #  - python -m pip install cibuildwheel
+      #  - python -m pip install twine
+      #  - make
+      script:
         - python -m pip install pip --upgrade
         - python -m pip install cibuildwheel
-        - python -m pip install twine
-        - make
-      script:
         - cibuildwheel --platform macos --output-dir $CIBW_OUPUT_DIR
-      after_script:
-        #- python -m pip install twine
+        - python -m pip install twine
+        - python -m pip install cython
+        - make
         - python setup.py sdist
         - python -m twine upload dist/*.whl dist/*.tar.*
+      #after_script:
+      #  #- python -m pip install twine
+      #  - python setup.py sdist
+      #  - python -m twine upload dist/*.whl dist/*.tar.*
 
       
     #- os: linux

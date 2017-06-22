@@ -13,15 +13,15 @@ env:
 matrix:
   fast_finish: true
   include:
-    #- os: osx
-    #  before_install:
-    #    - python -m pip install pip --upgrade
-    #    - python -m pip install cython
-    #    - make
-    #  install:
-    #    - pip install cibuildwheel
-    #  script:
-    #    - cibuildwheel --platform macos --output-dir $CIBW_OUPUT_DIR
+    - os: osx
+      before_install:
+        - python -m pip install pip --upgrade
+        - python -m pip install cython
+        - make
+      install:
+        - pip install cibuildwheel
+      script:
+        - cibuildwheel --platform macos --output-dir $CIBW_OUPUT_DIR
       
     - os: linux
       sudo: false
@@ -39,8 +39,11 @@ matrix:
       #  - make
       install:
         - pip install --upgrade pip
-        #- pip install cython
+        - pip install cython
         - pip install cibuildwheel
       script:
         - make
         - cibuildwheel --platform linux --output-dir $CIBW_OUPUT_DIR
+
+cache:
+  pip

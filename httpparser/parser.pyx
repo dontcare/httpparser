@@ -27,7 +27,6 @@ cdef class Parser:
 cdef class Headers:
 
     def __cinit__(self):
-        #self._headers = {}
         self.pico_headers = <pico.phr_header * >calloc(100, sizeof(pico.phr_header))
         self.num_headers = sizeof(self.pico_headers) * sizeof(self.pico_headers[0])
 
@@ -38,12 +37,11 @@ cdef class Headers:
             name = self.pico_headers[i].name[:name_len]
             value_len = self.pico_headers[i].value_len
             value = self.pico_headers[i].value[:value_len]
-            #if on_header:
-            #    on_header(name, value)
-            #self._headers[name] = value
+            if on_header:
+                on_header(name, value)
+            h[name] = value
         if on_headers:
-            #on_headers(_headers)
-            print("SET HEADERS")
+            on_headers(h)
 
     def __dealloc__(self):
         free(< void * >self.pico_headers)

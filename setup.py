@@ -21,6 +21,9 @@ ext_modules = [
             'httpparser/picohttpparser.o',
         ],
         include_dirs=['./picohttpparser'],
+        #libraries=['picohttpparser'],
+        #extra_link_args=['-Wl,-rpath=./picohttpparser'],
+        #library_dirs=['./httpparser'],
         extra_compile_args=['-O2'],
     ),
 ]
@@ -87,6 +90,7 @@ setuptools.setup(
     url="https://github.com/dontcare/httpparser",
     packages=setuptools.find_packages(),
     include_package_data=True,
+    package_data={'picohttpparser': ['httpparser/libpicohttpparser.so']},
     zip_safe=False,
     install_requires=install_requires,
     tests_require=tests_require,

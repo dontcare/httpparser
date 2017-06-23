@@ -13,7 +13,7 @@ httpparser is a Python binding for PicoHttpParser
 Installation
 ------------
 
-httpparser requires Python 2.7, 3.4+ and is available on PyPI.
+httpparser requires Python 3.5+ and is available on PyPI.
 
 Use pip to install it::
 

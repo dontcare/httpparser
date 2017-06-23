@@ -7,7 +7,7 @@ env:
     - TWINE_USERNAME: dontcare
     - TWINE_REPOSITORY: httpparser
     - TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
-    - CIBW_SKIP="cp26-* cp33-* cp34*"
+    - CIBW_SKIP="cp26-* cp27-* cp33-* cp34*"
     - CIBW_OUPUT_DIR="dist/"
 
 matrix:

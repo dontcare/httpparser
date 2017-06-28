@@ -5,7 +5,7 @@ compile:
 	python setup.py build_ext --inplace;
 
 pico:
-		gcc -c vendors/picohttpparser/picohttpparser.c -O3 -fpic -msse4.2
+	gcc -c vendors/picohttpparser/picohttpparser.c -O3 -fpic -msse4.2
 
 all: clean compile
 

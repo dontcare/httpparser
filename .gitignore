@@ -1,0 +1,11 @@
+# -*- mode: gitignore; -*-
+*~
+\#*\#
+build/
+dist/
+examples/
+*.o
+*.so
+*.egg-info
+.venv*
+*.c
